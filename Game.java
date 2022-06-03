@@ -1,7 +1,7 @@
 //Final Project
 //Alec Zoe Felix Celina Gavin
 //Overlake Monopoly
-//Game  class runs the game loop
+//Game  class runs the game loop.
 import java.util.*;
 
 
@@ -54,6 +54,26 @@ public class Game {
             }
             else if(player.getPos()+moveAmount==12){
                 board[9][9]="1";
+                if(Math.floor(player.getPos()/6)==3){
+                    System.out.println("Channel 3");
+                    System.out.println(board[9-(player.getPos())][1]);
+                    board[9-(player.getPos())][1]="_";
+                    
+                }
+                else if(Math.floor(player.getPos()/6)==2){
+                    System.out.println("Channel 2");
+                    board[1][1+(player.getPos())]=board[1][1+(player.getPos())];
+                    
+                }
+                else if(Math.floor(player.getPos()/6)==1){
+                    System.out.println("Channel 1");
+                    board[2+(player.getPos()-6)][9]="_";
+                }
+                else if(Math.floor(player.getPos()/6)==0){
+                    System.out.println("Channel 0");
+                    board[1][1+player.getPos()]=board[9][1+(player.getPos())];
+                    board[1][2+player.getPos()]=board[9][2+(player.getPos())];
+                }
             }
             else if(player.getPos()+moveAmount==6){
                 board[1][9]="1";
@@ -65,7 +85,7 @@ public class Game {
                 }
                 else if(Math.floor(player.getPos()/6)==2){
                     System.out.println("Channel 2");
-                    board[9][9-(player.getPos()-12)]=board[1][9-(player.getPos()-12)];
+                    board[9][9-(player.getPos()-12)]=board[1][8-(player.getPos()-12)];
                 }
                 else if(Math.floor(player.getPos()/6)==1){
                     System.out.println("Channel 1");
@@ -102,7 +122,7 @@ public class Game {
                 }
                 else if(((player.getPos()+moveAmount)/6)>=2){
 
-                    board[9][9-moveAmount]=board[1][2+(player.getPos()-12)].substring(0,board[1][2+(player.getPos()-12)].length()/2)+playerNum+board[1][2+(player.getPos()-12)].substring(board[1][2+(player.getPos()-12)].length()/2);
+                    board[9][9-moveAmount]=board[1][2+(player.getPos()-6*(int)Math.floor(player.getPos()/6))].substring(0,board[1][2+(player.getPos()-12)].length()/2)+playerNum+board[1][2+(player.getPos()-12)].substring(board[1][2+(player.getPos()-12)].length()/2);
                         if(board[9][9-moveAmount].length()<board[1][2+(player.getPos()-12)].length()){
                             board[9][9-moveAmount]+="_";
                             System.out.println("Extending");
@@ -132,7 +152,14 @@ public class Game {
                     }
                 }
                 else if(((player.getPos()+moveAmount)/6)>=1){
-                    board[9][1+moveAmount]="1";
+                    System.out.println("This section???");
+                    if(moveAmount>6){
+                        board[2+(moveAmount-6)][9]="1";
+                    }
+                    else{
+                        board[2+(moveAmount+player.getPos()-6)][9]="1";
+                    }
+                    
                     
                     if(Math.floor(player.getPos()/6)==3){
                         System.out.println("Channel 3");
@@ -147,7 +174,7 @@ public class Game {
                     }
                     else if(Math.floor(player.getPos()/6)==1){
                         System.out.println("Channel 1");
-                        board[1+(player.getPos())][9]="_";
+                        board[2+(player.getPos()-6)][9]="_";
                     }
                     else if(Math.floor(player.getPos()/6)==0){
                         System.out.println("Channel 0");
@@ -156,7 +183,7 @@ public class Game {
                     }
             }
             else if(((player.getPos()+moveAmount)/6)>=0){
-                
+                System.out.println("first section");
                 board[1][2+moveAmount+player.getPos()]=board[1][2+(moveAmount+player.getPos())].substring(0,board[1][2+(moveAmount+player.getPos())].length()/2)+playerNum+board[1][2+(moveAmount+player.getPos())].substring(board[1][2+(moveAmount+player.getPos())].length()/2);
                 while(board[1][2+moveAmount+player.getPos()].length()!=board[9][2+moveAmount+player.getPos()].length()){
                     if(board[1][2+moveAmount+player.getPos()].length()>board[9][2+moveAmount+player.getPos()].length()){
